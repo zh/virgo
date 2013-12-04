@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Purpose: Create Go virtual environment
+#
+# Usage:   virgo ./new_proj
+#          cd ./new_proj && source ./bin/activate
+#          ... do some amazing stuff ...
+#          deactivate
+
+# where is virgo installed
+VIDIR="${HOME}/bin"
+DIR=${1:?-"Usage: virgo PATH"}
+
+if [ -d ./${DIR} ]; then
+  echo "[!] ${DIR} already exists."
+  exit 1
+fi
+
+mkdir -p ${DIR}/bin ${DIR}/src ${DIR}/pkg && \
+cp -f ${VIDIR}/goactivate ${DIR}/bin/activate && chmod 644 ${DIR}/bin/activate
+
+[ -d ./${DIR} ] && cd ${DIR}
+
+echo "Run 'cd ${DIR} && source ./bin/activate'"
+
+exit 0
